@@ -21,6 +21,9 @@ const getAuthorizationUrl = (options = {}) => {
   url.searchParams.append('redirect_uri', options.redirectUri);
 
   if (options.scope){
+    if( options.scope.indexOf('name') || options.scope.indexOf('email') ){
+      url.searchParams.append( 'response_mode', 'form_post' );
+    }
     url.searchParams.append('scope', 'openid ' + options.scope);
   } else {
     url.searchParams.append('scope', 'openid');
